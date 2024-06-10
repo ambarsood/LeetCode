@@ -5,39 +5,27 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        n1,n2="",""
+        while l1:
+            n1=str(l1.val) + n1
+            l1=l1.next
+        while l2:
+            n2=str(l2.val) + n2
+            l2=l2.next
+        if not n1:
+            n1="0"
+        if not n2:
+            n2="0"
+
+        summ= int(n1)+int(n2)
+
         dummyHead = ListNode(0)
         tail = dummyHead
-        carry = 0
 
-        while l1 is not None or l2 is not None or carry != 0:
-            if l1 is not None:
-                digit1 = l1.val
-            else:
-                digit1 = 0
+        for i in reversed(str(summ)):
+            tail.next=ListNode(int(i))
+            tail=tail.next
+        return dummyHead.next            
 
-            if l2 is not None:
-                digit2 = l2.val
-            else:
-                digit2 = 0
 
-            sum = digit1 + digit2 + carry
-            digit = sum % 10
-            carry = sum // 10
 
-            newNode = ListNode(digit)
-            tail.next = newNode
-            tail = tail.next
-
-            if l1 is not None:
-                l1 = l1.next
-            else:
-                l1 = None
-
-            if l2 is not None:
-                l2 = l2.next
-            else:
-                l2 = None
-
-        result = dummyHead.next
-        dummyHead.next = None
-        return result
