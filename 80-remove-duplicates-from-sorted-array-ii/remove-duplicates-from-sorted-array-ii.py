@@ -1,16 +1,15 @@
+from typing import List
+
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        index = 1
-        count=0
-        for i in range(1, len(nums)):
-            if nums[i] != nums[i - 1]:
-                nums[index] = nums[i]
-                index += 1
-                count=0
-            elif nums[i]==nums[i-1]:
-                if count<1:
-                    count+=1
-                    nums[index] = nums[i]
-                    index += 1
-
-        return index
+        n = len(nums)
+        if n < 3:
+            return n
+        
+        i = 2
+        for j in range(2, n):
+            if nums[j] != nums[i - 2]:
+                nums[i] = nums[j]
+                i += 1
+                
+        return i
