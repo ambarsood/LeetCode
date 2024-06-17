@@ -1,11 +1,13 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        N=len(nums)
-        dp = [float('inf') for _ in range(N)]
-        dp[0]=0
+       N=len(nums)
+       i,jump,lastpos,maxpos=0,0,0,0
 
-        for i in range(N):
-            for j in range(1,nums[i]+1):
-                if i+j<N:
-                    dp[i+j]=min(dp[i+j],dp[i]+1)
-        return dp[-1]
+       while i<N-1:
+
+        maxpos=max(maxpos,i+nums[i])
+        if i==lastpos:
+            lastpos=maxpos
+            jump+=1
+        i+=1
+       return jump 
